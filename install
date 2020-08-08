@@ -50,7 +50,7 @@ for f in "${FILES[@]}"; do
   AS_SUDO=""
 
   # Set sudo check var to "sudo" only if file is global.
-  [[ $f != files/HOME* ]] && AS_SUDO="sudo"
+  [[ "$f" != files/HOME* ]] && AS_SUDO="sudo"
 
   # Get destination directory.
   DEST_DIR=$(dirname "$DEST")
@@ -60,7 +60,7 @@ for f in "${FILES[@]}"; do
 
   # If file is a symlink, unlink/remove file, then replace it with this one.
   # Otherwise, backup it first.
-  if [[ -L "$DEST" ]]; then
+  if [ -L "$DEST" ]; then
     eval "$AS_SUDO" rm -f "$DEST" &>/dev/null
     eval "$AS_SUDO" unlink "$DEST" &>/dev/null
   else
