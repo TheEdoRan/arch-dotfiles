@@ -112,7 +112,8 @@ rm -rf $HOME/.config/nvim &>/dev/null
 git clone https://github.com/theedoran/nvim-config $HOME/.config/nvim
 
 # Monitor layout
-git clone https://github.com/theedoran/arch-monitor-layout
+rm -rf $HOME/.scripts/monitor-layout
+git clone https://github.com/theedoran/arch-monitor-layout $HOME/.scripts/monitor-layout
 . ./arch-monitor-layout/install
 
 
@@ -122,9 +123,11 @@ git clone https://github.com/theedoran/arch-monitor-layout
 
 
 # UFW
+sudo systemctl enable --now ufw
 sudo ufw reload
 
 # intel-undervolt
+sudo systemctl enable --now intel-undervolt
 sudo intel-undervolt apply
 
 # Finished installing.
