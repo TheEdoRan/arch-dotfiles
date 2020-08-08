@@ -130,5 +130,24 @@ sudo ufw reload
 sudo systemctl enable --now intel-undervolt
 sudo intel-undervolt apply
 
+
+##################################
+#          POST-INSTALL          #
+##################################
+
+
+# Fish plugins (fisher).
+/usr/bin/fish -c "fisher self-update; fisher"
+
+# Tmux plugins (TPM).
+rm -rf $HOME/.tmux
+$HOME/.tmux/plugins/tpm/bin/install_plugins
+/usr/bin/tmux source-file $HOME/.tmux.conf 2>/dev/null
+
+# Neovim plugins (vim-plug).
+curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
+  "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+
+
 # Finished installing.
 echo -e "\nFinished ${CYAN}Arch Linux${NC} post-installation!"
