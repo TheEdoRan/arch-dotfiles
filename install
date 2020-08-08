@@ -114,7 +114,7 @@ git clone https://github.com/theedoran/nvim-config $HOME/.config/nvim
 # Monitor layout
 rm -rf $HOME/.scripts/monitor-layout
 git clone https://github.com/theedoran/arch-monitor-layout $HOME/.scripts/monitor-layout
-. ./arch-monitor-layout/install
+. $HOME/.scripts/monitor-layout/install
 
 
 ##################################
