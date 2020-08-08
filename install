@@ -1,1 +1,137 @@
 #!/usr/bin/env bash
+
+
+##################################
+#              INIT              #
+##################################
+
+
+# Colors
+NC='\033[0m'
+CYAN='\033[0;36m'
+RED='\033[0;31m'
+
+
+###################################
+#              UTILS              #
+###################################
+
+
+# Exit the script
+exit_script () {
+  clear && echo -e "${RED}Script terminated before finish.${NC}" && exit 1
+}
+
+# Check if user wants to exit before finish.
+trap exit_script INT
+
+
+###################################
+#             INSTALL             #
+###################################
+
+
+# Starting the installation.
+echo -e "Starting ${CYAN}Arch Linux${NC} TheEdoRan's dotfiles copying!"
+
+sleep 2
+
+# Get all config files and store them in array.
+readarray -d '' FILES <  <(find files/* -type f -print0)
+
+for f in "${FILES[@]}"; do
+  # Set original and destination paths.
+  ORIG="$(pwd)/$f"
+  DEST=$(echo "$f" | sed "s/^files//" | sed "s|^/HOME|$HOME|")
+
+  # Check if we need sudo for execution of commands or not (local/global dotfile).
+
+  # Init sudo as empty string (local dotfile).
+  AS_SUDO=""
+
+  # Set sudo check var to "sudo" only if file is global.
+  [[ $f != files/HOME* ]] && AS_SUDO="sudo"
+
+  # Get destination directory.
+  DEST_DIR=$(dirname "$DEST")
+
+  # Make directory for file if it doesn't exist.
+  eval "$AS_SUDO" mkdir -p "$DEST_DIR"
+
+  # If file is a symlink, unlink/remove file, then replace it with this one.
+  # Otherwise, backup it first.
+  if [[ -L "$DEST" ]]; then
+    eval "$AS_SUDO" rm -f "$DEST" &>/dev/null
+    eval "$AS_SUDO" unlink "$DEST" &>/dev/null
+  else
+    eval "$AS_SUDO" mv "$DEST"{,.orig} &>/dev/null
+  fi
+
+  # Link the dotfile to its correct position.
+  eval "$AS_SUDO" ln -sf "$ORIG" "$DEST"
+done
+
+
+##################################
+#              REPOS             #
+##################################
+
+
+# Check if git is installed on the system.
+if [ ! -x "$(command -v git)" ]; then
+  echo 'git not found. Proceeding to install it.'
+  sudo pacman -S git --needed --noconfirm
+fi
+
+# Binaries
+rm -rf $HOME/.bin &>/dev/null
+git clone https://github.com/theedoran/arch-bin $HOME/.bin
+
+# Fish
+rm -rf $HOME/.config/fish &>/dev/null
+git clone https://github.com/theedoran/fish-config $HOME/.config/fish
+
+# i3
+rm -rf $HOME/.config/i3 &>/dev/null
+git clone https://github.com/theedoran/i3-config $HOME/.config/i3
+
+# i3blocks
+rm -rf $HOME/.config/i3blocks &>/dev/null
+git clone https://github.com/theedoran/i3blocks-config $HOME/.config/i3blocks
+
+# Picom
+rm -rf $HOME/.config/picom &>/dev/null
+git clone https://github.com/theedoran/picom-config $HOME/.config/picom
+
+# Dunst
+rm -rf $HOME/.config/dunst &>/dev/null
+git clone https://github.com/theedoran/dunst-config $HOME/.config/dunst
+
+# Neovim
+rm -rf $HOME/.config/nvim &>/dev/null
+git clone https://github.com/theedoran/nvim-config $HOME/.config/nvim
+
+# Monitor layout
+git clone https://github.com/theedoran/arch-monitor-layout
+. ./arch-monitor-layout/install
+rm -rf arch-monitor-layout/
+
+
+##################################
+#            SERVICES            #
+##################################
+
+
+# UFW
+sudo ufw enable
+sudo systemctl enable ufw
+
+# intel-undervolt
+sudo intel-undervolt apply
+sudo systemctl enable intel-undervolt
+
+# Time sync
+sudo timedatectl set-ntp true
+
+# Finished installing.
+echo -e "\nFinished ${CYAN}Arch Linux${NC} post-installation!"
