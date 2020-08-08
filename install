@@ -122,15 +122,10 @@ git clone https://github.com/theedoran/arch-monitor-layout
 
 
 # UFW
-sudo ufw enable
-sudo systemctl enable ufw
+sudo ufw reload
 
 # intel-undervolt
 sudo intel-undervolt apply
-sudo systemctl enable intel-undervolt
-
-# Time sync
-sudo timedatectl set-ntp true
 
 # Finished installing.
 echo -e "\nFinished ${CYAN}Arch Linux${NC} post-installation!"
