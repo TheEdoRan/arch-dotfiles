@@ -130,6 +130,23 @@ sudo ufw reload
 sudo systemctl enable --now intel-undervolt
 sudo intel-undervolt apply
 
+# dnscrypt-proxy
+# Backup original resolv.conf
+sudo mv /etc/resolv.conf{,.orig} &>/dev/null
+
+# Write to file.
+sudo tee /etc/resolv.conf >/dev/null <<EOF
+nameserver ::1
+nameserver 127.0.0.1
+EOF
+
+# Make file read-only.
+sudo chattr +i /etc/resolv.conf
+
+# Restart services
+sudo systemctl restart dnscrypt-proxy
+sudo systemctl restart NetworkManager
+
 
 ##################################
 #          POST-INSTALL          #
