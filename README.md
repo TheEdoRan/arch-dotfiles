@@ -2,12 +2,7 @@
 
 Clone the repo and execute `./install`.
 
-<hr>
+#### Linked projects
 
-## Auto install
-
-You can also run the auto-installation script without cloning this repo, using
-the following command: 
-```
-curl -L bit.ly/ter-arch-dot | bash
-```
+See also [ASS](https://github.com/theedoran/ASS) and
+[FART](https://github.com/theedoran/FART) installers.
