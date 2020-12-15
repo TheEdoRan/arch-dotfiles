@@ -13,3 +13,8 @@ PS1="\[\033[38;5;45m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033
 
 export JAVA_HOME="/usr/bin/jvm/default"
 export TERMINAL="/usr/bin/konsole"
+
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
+then
+	exec fish
+fi
