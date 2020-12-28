@@ -101,44 +101,17 @@ git clone https://github.com/theedoran/nvim-config $HOME/.config/nvim
 ##################################
 
 
-# UFW
-sudo systemctl enable --now ufw
-sudo ufw reload
-
-# intel-undervolt
-sudo systemctl enable --now intel-undervolt
-sudo intel-undervolt apply
-
-# dnscrypt-proxy
-# Backup original resolv.conf
-sudo mv /etc/resolv.conf{,.orig} &>/dev/null
-
-# Write to file.
-sudo tee /etc/resolv.conf >/dev/null <<EOF
-nameserver ::1
-nameserver 127.0.0.1
-EOF
-
-# Make file read-only.
-sudo chattr +i /etc/resolv.conf
-
-# Restart services
-sudo systemctl restart dnscrypt-proxy
-sudo systemctl restart NetworkManager
-
-
 ##################################
 #          POST-INSTALL          #
 ##################################
 
 
 # Fish plugins (fisher).
-/usr/bin/fish -c "fisher self-update; fisher"
+/usr/bin/fish -c "fisher update"
 
 # Neovim plugins (vim-plug).
 curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
   "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-
 
 # Finished installing.
 echo -e "\nFinished ${CYAN}Arch Linux${NC} post-installation!"
