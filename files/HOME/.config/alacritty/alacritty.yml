@@ -37,6 +37,7 @@ shell:
   program: /usr/bin/fish
   args:
     - --login
+    - --interactive
 
 key_bindings:
   - { key: C, mods: Control|Shift, action: Copy }
