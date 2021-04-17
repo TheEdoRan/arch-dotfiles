@@ -8,7 +8,7 @@ window:
 
 scrolling:
   history: 50000
-  multiplier: 3
+  multiplier: 1
 
 font:
   normal:
