@@ -1,0 +1,39 @@
+env:
+  TERM: alacritty
+
+window:
+  title: Alacritty
+  class:
+    instance: Alacritty
+
+scrolling:
+  history: 50000
+  multiplier: 3
+
+font:
+  normal:
+    family: Hack Nerd Font
+    style: Regular
+  bold:
+    family: Hack Nerd Font
+    style: Bold
+  italic:
+    family: Hack Nerd Font
+    style: Italic
+  bold_italic:
+    family: Hack Nerd Font
+    style: Bold Italic
+  size: 11.0
+
+bell:
+  duration: 0
+
+background_opacity: 1.0
+
+cursor:
+    blinking: On
+
+shell:
+  program: /usr/bin/fish
+  args:
+    - --login
