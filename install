@@ -84,8 +84,8 @@ if [ ! -x "$(command -v git)" ]; then
 fi
 
 # Binaries
-rm -rf $HOME/.bin &>/dev/null
-git clone https://github.com/theedoran/arch-bin $HOME/.bin
+rm -rf $HOME/.local/bin &>/dev/null
+git clone https://github.com/theedoran/arch-bin $HOME/.local/bin
 
 # Fish
 rm -rf $HOME/.config/fish &>/dev/null
@@ -95,10 +95,21 @@ git clone https://github.com/theedoran/fish-config $HOME/.config/fish
 rm -rf $HOME/.config/nvim &>/dev/null
 git clone https://github.com/theedoran/nvim-config $HOME/.config/nvim
 
+# i3
+rm -rf $HOME/.config/i3 &>/dev/null
+git clone https://github.com/theedoran/i3-config $HOME/.config/i3
 
-##################################
-#            SERVICES            #
-##################################
+# i3blocks
+rm -rf $HOME/.config/i3blocks &>/dev/null
+git clone https://github.com/theedoran/i3blocks-config $HOME/.config/i3blocks
+
+# Picom
+rm -rf $HOME/.config/picom &>/dev/null
+git clone https://github.com/theedoran/picom-config $HOME/.config/picom
+
+# Dunst
+rm -rf $HOME/.config/dunst &>/dev/null
+git clone https://github.com/theedoran/dunst-config $HOME/.config/dunst
 
 
 ##################################
