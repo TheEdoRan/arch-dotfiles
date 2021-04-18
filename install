@@ -71,6 +71,9 @@ for f in "${FILES[@]}"; do
   eval "$AS_SUDO" ln -sf "$ORIG" "$DEST"
 done
 
+# Copy LightDM configuration.
+sudo cp lightdm/* /etc/lightdm/
+
 
 ##################################
 #              REPOS             #
