@@ -1,0 +1,11 @@
+configuration {
+	modi: "drun,calc";
+	width: 35;
+  font: "Hack 14";
+	show-icons: true;
+	icon-theme: "Papirus-Dark";
+	lines: 10;
+	fake-transparency: true;
+}
+
+@import "~/.config/rofi/themes/theme.rasi"
