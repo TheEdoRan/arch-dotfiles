@@ -5,6 +5,7 @@ window:
   title: Alacritty
   class:
     instance: Alacritty
+    general: Alacritty
 
 scrolling:
   history: 50000
