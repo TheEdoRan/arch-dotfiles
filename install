@@ -101,10 +101,12 @@ git clone https://github.com/theedoran/nvim-config $HOME/.config/nvim
 # i3
 rm -rf $HOME/.config/i3 &>/dev/null
 git clone https://github.com/theedoran/i3-config $HOME/.config/i3
+$HOME/.config/i3/init
 
 # i3blocks
 rm -rf $HOME/.config/i3blocks &>/dev/null
 git clone https://github.com/theedoran/i3blocks-config $HOME/.config/i3blocks
+$HOME/.config/i3blocks/init
 
 # Picom
 rm -rf $HOME/.config/picom &>/dev/null
